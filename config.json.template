@@ -1,0 +1,33 @@
+{
+   "backup_location": "/data",
+   "json_state_file_path": "/pghoard_state.json",
+   "backup_sites": {
+       "default": {
+           "active_backup_mode": "pg_receivexlog",
+           "pg_receivexlog_path": "/usr/libexec/postgresql14/pg_receivewal",
+           "basebackup_count": 2,
+           "basebackup_interval_hours": 24,
+           "nodes": [
+               {
+                   "host": "postgres.dns.podman",
+                   "port": 5432,
+                   "user": "replica",
+                   "password": "replica",
+                   "application_name": "pghoard"
+               }
+           ],
+           "object_storage": {
+               "storage_type": "local",
+               "directory": "/backups"
+           },
+           "pg_bin_directory": "/usr/libexec/postgresql14/",
+           "pg_data_directory": "/var/lib/postgresql/data/pgdata"
+       }
+   },
+   "http_address": "127.0.0.1",
+   "http_port": 16000,
+   "log_level": "INFO",
+   "syslog": false,
+   "syslog_address": "/dev/log",
+   "syslog_facility": "local2"
+}
