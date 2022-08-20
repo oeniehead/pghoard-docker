@@ -7,5 +7,8 @@ if [ -n "$TESTING" ]; then
     exit 0
 fi
 
-cat /pghoard.json.template | sed "s/\"password\": \"replica\"/\"password\": \"${REPLICA_PASSWORD}\"/" | sed "s/\"user\": \"replica\"/\"user\": \"${REPLICA_USER}\"/" > /pghoard.json
+export POSTGRES_REPLICA_PASSWORD=`cat $POSTGRES_REPLICA_PASSWORD_FILE`
+
+cat /pghoard.json.template | envsubst > /pghoard.json
+
 pghoard --config /pghoard.json
